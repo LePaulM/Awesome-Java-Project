@@ -285,23 +285,35 @@ public abstract class Animal {
 			if (this.aProcree == true) {
 				break;
 			} else {
-				//		Définition des cases adjacentes
-				Case case1 = Grille.getCase(this.getEmplacement().getX()-1, this.getEmplacement().getY()-1);
-				Case case2 = Grille.getCase(this.getEmplacement().getX(), this.getEmplacement().getY()-1);
-				Case case3 = Grille.getCase(this.getEmplacement().getX()+1, this.getEmplacement().getY()-1);
-				Case case4 = Grille.getCase(this.getEmplacement().getX()-1, this.getEmplacement().getY());
-				Case case5 = Grille.getCase(this.getEmplacement().getX()+1, this.getEmplacement().getY());
-				Case case6 = Grille.getCase(this.getEmplacement().getX()-1, this.getEmplacement().getY()+1);
-				Case case7 = Grille.getCase(this.getEmplacement().getX(), this.getEmplacement().getY()+1);
-				Case case8 = Grille.getCase(this.getEmplacement().getX()+1, this.getEmplacement().getY()+1);
-				//		Création de la liste des cases adjacentes
-				ArrayList<Case> cases=new ArrayList<Case>(case1,case2,case3,case4,case5,case6,case7, case8);
+				
+				// il y a moyen de faire la m�me chose avec la position
+				// il faut mettre la reproduction dans les classes abstraites des animaux 
+				// car animal est une classe abstraite (on ne peut pas instancier un objet d'une classe abstraite
+//				Création de la liste des cases adjacentes
+				ArrayList<Case> cases = new ArrayList<Case>();
+//				Définition des cases adjacentes
+				Case case1 = Grille.getCase1(this.getEmplacement().getX()-1, this.getEmplacement().getY()-1);
+				cases.add(case1);
+				Case case2 = Grille.getCase1(this.getEmplacement().getX(), this.getEmplacement().getY()-1);
+				cases.add(case2);
+				Case case3 = Grille.getCase1(this.getEmplacement().getX()+1, this.getEmplacement().getY()-1);
+				cases.add(case3);
+				Case case4 = Grille.getCase1(this.getEmplacement().getX()-1, this.getEmplacement().getY());
+				cases.add(case4);
+				Case case5 = Grille.getCase1(this.getEmplacement().getX()+1, this.getEmplacement().getY());
+				cases.add(case5);
+				Case case6 = Grille.getCase1(this.getEmplacement().getX()-1, this.getEmplacement().getY()+1);
+				cases.add(case6);
+				Case case7 = Grille.getCase1(this.getEmplacement().getX(), this.getEmplacement().getY()+1);
+				cases.add(case7);
+				Case case8 = Grille.getCase1(this.getEmplacement().getX()+1, this.getEmplacement().getY()+1);
+				cases.add(case8);
 				for (Case c : cases){ 
-					if (cases(c).estVide == false) {									//			Si une des cases adjacentes n'est pas vide, 
-						if (cases(c).getAnimal().getEspece().equals(this.espece))		//			et si l'animal présent sur la case adjacente est de la même espèce, 
+					if (c.estVide() == false) {									//			Si une des cases adjacentes n'est pas vide, 
+						if (c.getAnimal().getEspece().equals(this.espece))		//			et si l'animal présent sur la case adjacente est de la même espèce, 
 							this.aProcree = true;										// 			la variable permettant de savoir si l'animal a procree devient true
 						for (Case cbis : cases){										// 			on cherche ensuite  
-							if (cases(cbis).estVide == true) {							//			une case vide 
+							if (c.estVide() == true) {							//			une case vide 
 								Animal animal = new Animal(Gestionnaire.getTour(),cbis,
 										this.tpDecomposition,  this.couleur, this.tailleEstomac/2,  this.maturite,	// pour créer un nouvel individu
 										this.aProcree,this.meurtFaim);
@@ -320,7 +332,7 @@ public abstract class Animal {
 	 */
 	public boolean famine() {
 		if (estVivant == false) {					// si l'animal est decedé 
-			break;									// on passe à la suite du tour
+			return false;									// on passe à la suite du tour
 		} else if (remplissageEstomac == 0) {		// sinon si l'estomac est vide
 			meurtFaim = meurtFaim - 1;				// le compteur qui dit combien de temps l'animal peut vivre sans manger prend - 1
 			if (meurtFaim == 0) {					// si ce compteur atteint zéro
@@ -329,6 +341,7 @@ public abstract class Animal {
 			else return false;						// sinon on passe à la suite du tour
 
 		}
+		return aProcree;
 	}
 
 
@@ -339,7 +352,7 @@ public abstract class Animal {
 	public void decede() {
 
 		this.setEstVivant(false);					// on dit que l'animal n'est plus vivant
-		this.setDateDeces(Gestionnaire.tour);		// on enregistre la date du deces
+		this.setDateDeces(Gestionnaire.getTour());		// on enregistre la date du deces
 		this.emplacement.setEstVide(true);			// la case devient vide (il n'y a plus d'animal dessus)
 		this.emplacement.setACadavre(true);			// la case a un cadavre maintenant
 	}

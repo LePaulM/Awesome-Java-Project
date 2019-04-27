@@ -3,6 +3,9 @@ package animaux;
 import java.awt.Color;
 import java.util.Random;
 
+import Gestion.Gestionnaire;
+import ecosysteme.Case;
+
 /**
  * 
  * @author formation
@@ -28,14 +31,14 @@ public class Mouche extends Charognard{
 	 * @param aProcree
 	 * @param meurtFaim
 	 */
-	public Mouche(int id, int dateNaissance,  Case emplacement, 
+	public Mouche(int dateNaissance,  Case emplacement, 
 			int tpDecomposition,  Color couleur, int remplissageEstomac,  int maturite,
 			boolean aProcree,int meurtFaim) {
-		super(id, dateNaissance,emplacement, tpDecomposition,couleur,
+		super(dateNaissance,emplacement, tpDecomposition,couleur,
 				remplissageEstomac, maturite,aProcree,meurtFaim);
 
 		// on donne un id à l'animal
-		this.id = Grille.animaux.size() + 1;
+		this.id = Gestionnaire.getAnimaux().size() + 1;
 
 		//	donne une espérance de vie d'au moins 5 tours et pouvant aller jusqu'à 1/5 de plus
 		esperanceVie = 5;
@@ -56,11 +59,11 @@ public class Mouche extends Charognard{
 		 * son espèce.
 		 * cette fonction est activée par le Gestionnaire en début de tour
 		 */
-		if ((Gestion.tour - this.getDateNaissance())<=(esperanceVie/4)) {
+		if ((Gestionnaire.getTour() - this.getDateNaissance())<=(esperanceVie/4)) {
 			setViande(1);
 			setTailleEstomac(1);
 		}
-		else if((Gestion.tour - this.getDateNaissance())<=(esperanceVie/2)) {
+		else if((Gestionnaire.getTour() - this.getDateNaissance())<=(esperanceVie/2)) {
 			setViande(1);
 			setTailleEstomac(1);
 		}

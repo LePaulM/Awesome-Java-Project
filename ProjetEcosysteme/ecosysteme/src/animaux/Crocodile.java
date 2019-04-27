@@ -3,6 +3,9 @@ package animaux;
 import java.awt.Color;
 import java.util.Random;
 
+import Gestion.Gestionnaire;
+import ecosysteme.Case;
+
 /**
  * 
  * @author formation
@@ -27,14 +30,14 @@ public class Crocodile extends Carnivore{
 	 * @param aProcree
 	 * @param meurtFaim
 	 */
-	public Crocodile(int dateNaissance, int dateDeces,  Case emplacement,
+	public Crocodile(int dateNaissance,  Case emplacement,
 			int tpDecomposition,  Color couleur, int remplissageEstomac,  int maturite,
 			boolean aProcree,int meurtFaim) {
-		super(dateNaissance,dateDeces, emplacement, tpDecomposition,couleur,
+		super(dateNaissance, emplacement, tpDecomposition,couleur,
 				remplissageEstomac,maturite,aProcree,meurtFaim);
 
 		// on donne un id à l'animal
-		this.id = Grille.animaux.size() + 1;
+		this.id = Gestionnaire.getAnimaux().size() + 1;
 
 		//		donne une espérance de vie d'au moins 70 tours et pouvant aller jusqu'à 1/5 de plus
 		this.esperanceVie = 70;
@@ -53,11 +56,11 @@ public class Crocodile extends Carnivore{
 		 * son espèce.
 		 * cette fonction est activée par le Gestionnaire en début de tour
 		 */
-		if ((Gestion.tour-getDateNaissance())<=(esperanceVie/4)) {
+		if ((Gestionnaire.getTour()-getDateNaissance())<=(esperanceVie/4)) {
 			setViande(2);
 			setTailleEstomac(2);
 		}
-		else if((Gestion.tour-getDateNaissance())<=(esperanceVie/2)) {
+		else if((Gestionnaire.getTour()-getDateNaissance())<=(esperanceVie/2)) {
 			setViande(5);
 			setTailleEstomac(4);
 		}

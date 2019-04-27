@@ -2,6 +2,7 @@ package Gestion;
 
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.TimerTask;
 
 import animaux.Animal;
 
@@ -46,23 +47,27 @@ public class Gestionnaire {
 
 	public void nouveauTour() {
 		tour = tour++;
-		Timer timer = new Timer();
-		for (Animal e : animaux) {								// pour chaque animal présent dans la simulation
-			if (e.getEstVivant() == false){						// si l'animal est decedé,
-				e.seDecomposer();								// on applique la fonction seDecomposer()
-				continue;										// et on termine le tour de l'animal
-			}
-			else {												// sinon,
-				if (e.getEsperanceVie() <= tour - e.getDateNaissance() || e.famine() == true ) {	//si l'animal a atteint son esperance de vie, ou si il est en famine avancée
-					e.decede();												// il décede
-					continue;												// et on termine le tour de l'animal
-				}else {														//sinon,
-					e.seDeplacer();											// l'animal se déplace,
-					e.seNourrir();											// se nourrit si il le peut
-					e.seReproduire();										// et se reproduit si il le peut
+		TimerTask task = new TimerTask() {
+			@Override public void run() { 
+				for (Animal e : animaux) {								// pour chaque animal présent dans la simulation
+					if (e.getEstVivant() == false){						// si l'animal est decedé,
+						e.seDecomposer();								// on applique la fonction seDecomposer()
+						continue;										// et on termine le tour de l'animal
+					}
+					else {												// sinon,
+						if (e.getEsperanceVie() <= tour - e.getDateNaissance() || e.famine() == true ) {	//si l'animal a atteint son esperance de vie, ou si il est en famine avancée
+							e.decede();												// il décede
+							continue;												// et on termine le tour de l'animal
+						}else {														//sinon,
+							e.seDeplacer();											// l'animal se déplace,
+							e.seNourrir();											// se nourrit si il le peut
+							e.seReproduire();										// et se reproduit si il le peut
+						}
+					}
+
 				}
 			}
-
-		}
+		};
+		Timer timer = new Timer(); timer.scheduleAtFixedRate(task, 0, 1000); 
 	}
 }

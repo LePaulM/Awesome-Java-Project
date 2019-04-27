@@ -3,6 +3,9 @@ package animaux;
 import java.awt.Color;
 import java.util.Random;
 
+import Gestion.Gestionnaire;
+import ecosysteme.Case;
+
 /**
  * 
  * @author formation
@@ -36,7 +39,7 @@ public class Tigre extends Charognard{
 				remplissageEstomac, maturite,aProcree,meurtFaim);
 		
 		// on donne un id à l'animal
-		this.id = Grille.animaux.size() + 1;
+		this.id = Gestionnaire.getAnimaux().size() + 1;
 		
 		//	donne une espérance de vie d'au moins 16 tours et pouvant aller jusqu'à 1/5 de plus
 		esperanceVie = 16;
@@ -57,11 +60,11 @@ public class Tigre extends Charognard{
 		 * son espèce.
 		 * cette fonction est activée par le Gestionnaire en début de tour
 		 */
-		if ((Gestion.tour - this.getDateNaissance())<=(esperanceVie/4)) {
+		if ((Gestionnaire.getTour() - this.getDateNaissance())<=(esperanceVie/4)) {
 			setViande(2);
 			setTailleEstomac(1);
 		}
-		else if((Gestion.tour - this.getDateNaissance())<=(esperanceVie/2)) {
+		else if((Gestionnaire.getTour() - this.getDateNaissance())<=(esperanceVie/2)) {
 			setViande(5);
 			setTailleEstomac(3);
 		}

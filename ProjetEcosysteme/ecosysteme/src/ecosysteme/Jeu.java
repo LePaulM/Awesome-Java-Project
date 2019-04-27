@@ -73,7 +73,7 @@ public class Jeu {
 	 * @throws InterruptedException gere les exceptions d'interruption
 	 */
 	public Jeu() throws InterruptedException {
-		this(100, 10, 10, 100, 5, 5);
+		this(100, 10, 100, "Savane", "Partie Standard");
 	}
 
 

@@ -1,5 +1,7 @@
 package ecosysteme;
 
+import Gestion.Gestionnaire;
+
 public class Buisson extends Case{
 
 	/**
@@ -41,12 +43,12 @@ public class Buisson extends Case{
 		
 		if (nourriture==0) {
 
-			int tourDeRecup = Gestionnaire.tour;
+			int tourDeRecup = Gestionnaire.getTour();
 			
 			int recuperation=0;
 			
 			while(recuperation <= 3) {
-				recuperation = Gestionnaire.tour - tourDeRecup;
+				recuperation = Gestionnaire.getTour() - tourDeRecup;
 				if(recuperation==3) {
 					this.nourriture=10;
 				}

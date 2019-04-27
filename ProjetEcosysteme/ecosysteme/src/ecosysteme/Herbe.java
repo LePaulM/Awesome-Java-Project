@@ -1,5 +1,7 @@
 package ecosysteme;
 
+import Gestion.Gestionnaire;
+
 public class Herbe extends Case{
 	
 	/**
@@ -11,7 +13,7 @@ public class Herbe extends Case{
 	 * Constructeur
 	 */
 	public Herbe(){
-		this.nourriture=10;
+		this.nourriture = 10;
 	}
 
 	/**
@@ -19,7 +21,7 @@ public class Herbe extends Case{
 	 * @return
 	 */
 	public int getNourriture() {
-		return nourriture;
+		return this.nourriture;
 	}
 
 	/**
@@ -33,18 +35,18 @@ public class Herbe extends Case{
 
 
 	/**
-	 * méthode qui recharge le stock de nourriture que contient le buisson si il est vide
+	 * méthode qui recharge le stock de nourriture que contient l'herbe si il est vide
 	 */
 	public void recuperation() {
 
 		if (nourriture==0) {
 
-			int tourDeRecup = Gestionnaire.tour;
+			int tourDeRecup = Gestionnaire.getTour();
 
 			int recuperation=0;
 
 			while(recuperation <= 3) {
-				recuperation = Gestionnaire.tour - tourDeRecup;
+				recuperation = Gestionnaire.getTour() - tourDeRecup;
 				if(recuperation==3) {
 					this.nourriture=10;
 				}

@@ -196,12 +196,6 @@ public abstract class Grille {
 		return this.grille[x][y];
 	}
 	
-	public static Case getCase1(int x, int y) {
-		Case c = new Case();
-		c.setX(x);
-		c.setY(y);
-		return c;
-	}
 	
 	/**
 	 * Méthode permettant de créer la grille à partir des méthodes précédentes

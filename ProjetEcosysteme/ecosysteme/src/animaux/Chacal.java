@@ -3,6 +3,9 @@ package animaux;
 import java.awt.Color;
 import java.util.Random;
 
+import Gestion.Gestionnaire;
+import ecosysteme.Case;
+
 /**
  * 
  * @author formation
@@ -26,14 +29,14 @@ public class Chacal extends Charognard {
 	 * @param aProcree
 	 * @param meurtFaim
 	 */
-	public Chacal(int dateNaissance, int dateDeces, Case emplacement,
+	public Chacal(int dateNaissance, Case emplacement,
 			int tpDecomposition, Color couleur, int remplissageEstomac, int maturite,
 			boolean aProcree,int meurtFaim) {
-		super(dateNaissance,dateDeces, emplacement, tpDecomposition,couleur,
+		super(dateNaissance, emplacement, tpDecomposition,couleur,
 				remplissageEstomac, maturite,aProcree,meurtFaim);
 
 		// on donne un id à l'animal
-		this.id = Grille.animaux.size() + 1;
+		this.id = Gestionnaire.getAnimaux().size() + 1;
 
 		//	donne une espérance de vie d'au moins 12 tours et pouvant aller jusqu'à 1/5 de plus
 		esperanceVie = 12;
@@ -51,11 +54,11 @@ public class Chacal extends Charognard {
 		 * son espèce.
 		 * cette fonction est activée par le Gestionnaire en début de tour
 		 */
-		if ((Gestion.tour-getDateNaissance())<=(esperanceVie/4)) {
+		if ((Gestionnaire.getTour()-getDateNaissance())<=(esperanceVie/4)) {
 			setViande(1);
 			setTailleEstomac(1);
 		}
-		else if((Gestion.tour-getDateNaissance())<=(esperanceVie/2)) {
+		else if((Gestionnaire.getTour()-getDateNaissance())<=(esperanceVie/2)) {
 			setViande(2);
 			setTailleEstomac(2);
 		}

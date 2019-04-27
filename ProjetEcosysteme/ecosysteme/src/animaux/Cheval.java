@@ -3,6 +3,10 @@ package animaux;
 import java.awt.Color;
 import java.util.Random;
 
+import Gestion.Gestionnaire;
+import ecosysteme.Case;
+import ecosysteme.Grille;
+
 /**
  * 
  * @author formation
@@ -28,14 +32,14 @@ public class Cheval extends Herbivore{
 	 * @param aProcree
 	 * @param meurtFaim
 	 */
-	public Cheval(int dateNaissance, int dateDeces,  Case emplacement,
+	public Cheval(int dateNaissance,  Case emplacement,
 			int tpDecomposition,  Color couleur, int remplissageEstomac, int maturite,
 			boolean aProcree,int meurtFaim) {
-		super(dateNaissance,dateDeces, emplacement, tpDecomposition,couleur,
+		super(dateNaissance, emplacement, tpDecomposition,couleur,
 				remplissageEstomac,maturite,aProcree,meurtFaim);
 
 		// on donne un id à l'animal
-		this.id = Grille.animaux.size() + 1;
+		this.id = Gestionnaire.getAnimaux().size() + 1;
 
 		//	donne une espérance de vie d'au moins 20 tours et pouvant aller jusqu'à 1/5 de plus
 		esperanceVie = 25;
@@ -54,11 +58,11 @@ public class Cheval extends Herbivore{
 		 * son espèce.
 		 * cette fonction est activée par le Gestionnaire en début de tour
 		 */
-		if ((Gestionnaire.tour-getDateNaissance())<=(esperanceVie/4)) {
+		if ((Gestionnaire.getTour()-getDateNaissance())<=(esperanceVie/4)) {
 			setViande(2);
 			setTailleEstomac(1);
 		}
-		else if((Gestionnaire.tour-getDateNaissance())<=(esperanceVie/2)) {
+		else if((Gestionnaire.getTour()-getDateNaissance())<=(esperanceVie/2)) {
 			setViande(4);
 			setTailleEstomac(3);
 		}
@@ -67,3 +71,4 @@ public class Cheval extends Herbivore{
 			setTailleEstomac(8);
 		}
 	}
+}
