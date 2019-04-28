@@ -1,7 +1,7 @@
 package ecosysteme;
 
 /**
- * C'est la grille standart
+ * C'est la grille standard, pas touche on verra plus tard cette classe, 
  * @author formation
  *
  */
@@ -71,13 +71,6 @@ public class Standard extends Grille {
 				getGrille()[x][y+1]=2;
 			}
 		}
-	}
-
-
-	@Override
-	public void creationGrille() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	

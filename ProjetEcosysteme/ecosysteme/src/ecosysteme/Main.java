@@ -4,11 +4,13 @@ import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
+		
+		//ca laisse, regarde plus bas
 		/*
 		Grille gr=new Grille(60);
 		gr.creationMontagne();
 		gr.creationNeige(160);
-		gr.creationForet(30);
+		gr.creationArbre(30);
 		gr.creationBuisson(70);
 		gr.creationSable();
 		gr.creationEau();
@@ -18,10 +20,9 @@ public class Main {
 		siberie.creationNeige(500);
 		//siberie.creationEau();	
 		siberie.afficher();
-		
-	
+			
 		Savane sav = new Savane(60);
-		sav.creationForet(30);
+		sav.creationArbre(30);
 		sav.creationBuisson(70);
 		sav.creationSable();
 		sav.creationEau();
@@ -30,24 +31,27 @@ public class Main {
 		Steppe steppe = new Steppe(60);
 		steppe.creationEau();	
 		steppe.afficher();
-		
-	
-		MassifMontagneux s = new MassifMontagneux(60);
-		s.creationGrille();
-		
 		*/
-		Savane sav=new Savane(80);
-		sav.creationGrille();
-		/*
-		Syberie sib = new Syberie(60);
+	
+		
+		
+		// c'est ca que tu peut ''activer'' pour afficher les grilles, n'en affiche en qu'une a la fois /!\,
+		
+		//MassifMontagneux massif = new MassifMontagneux(60);
+		//massif.creationGrille();
+	
+		//Savane sav=new Savane(60);
+		//sav.creationGrille();
+	
+		Syberie sib = new Syberie(30);
 		sib.creationGrille();
 		
-		Jungle jun = new Jungle(60);
-		jun.creationGrille();
+		//Jungle jun = new Jungle(60);
+		//jun.creationGrille();
 		
-		Steppe steppe = new Steppe (60);
-		steppe.creationGrille();
-*/
+		//Steppe steppe = new Steppe (60);
+		//steppe.creationGrille();
+
 		}
 		
 		

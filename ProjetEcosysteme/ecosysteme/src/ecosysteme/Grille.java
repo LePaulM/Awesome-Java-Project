@@ -2,6 +2,7 @@ package ecosysteme;
 
 import java.util.ArrayList;
 
+
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JFrame;
@@ -10,12 +11,20 @@ import javax.swing.JFrame;
 public abstract class Grille {
 	
 	/**
-	 * attributs qui gerent la taille de notre grille carree, et la grille elle meme
+	 * attribut qui gere la taille de notre grille carree
 	 */
 	private int taille;
+	
+	/**
+	 * attribut qui gere la grille, sous forme de matrice
+	 */
 	private int[][] grille;
 
     
+	/**
+	 * Les getter
+	 * @return taille, grille
+	 */
     
 	public int getTaille() {
 		return taille;
@@ -42,7 +51,7 @@ public abstract class Grille {
 
 	
 	/**
-	 * méthode modifier case
+	 * une methode qui permet de modifier une case de la grille
 	 */
 	public void modifier(int x, int y, int z){
 		this.grille[x][y]=z;
@@ -50,7 +59,7 @@ public abstract class Grille {
 
 	
 	/**
-	 * methode qui crée les buissons
+	 * Une methode qui cree les buissons, applicable a toutes les classes filles, c'est une g�n�ration dans l'espace al�atoirement d'une quantitee de buisson definie en parametre. Lors de la creation de la grille un buisson ne peut etre place ni sur un autre buisson, ni sur aucun autre sol excepte l'herbe et le sable.
 	 * @param buisson
 	 */
 	public void creationBuisson(int buisson) {
@@ -71,12 +80,12 @@ public abstract class Grille {
 	}
 
 	/**
-	 * méthode qui crée les arbres avec une quantitée à préciser en entrée
-	 * @param foret
+	 * Une methode qui cree les arbres, applicable a toutes les classes filles, c'est une g�n�ration dans l'espace al�atoirement d'une quantitee d'arbre definie en parametre. Un arbres est grand et donc occupe plusieurs cases. Lors de la creation de la grille un arbre ne peut etre place sur aucun autre sol excepte l'herbe, le sable et les buissons, il ne peut superposer que legerment un autre arbre.
+	 * @param arbre
 	 */
-	public void creationForet(int foret) {
+	public void creationArbre(int arbre) {
 		int i=0;
-		while(i<foret) {
+		while(i<arbre) {
 			double a=Math.random()*this.taille;
 			double b=Math.random()*this.taille;
 			int x=(int)a;
@@ -126,7 +135,10 @@ public abstract class Grille {
 		}
 	}
 
-	
+	/**
+	 * Une methode qui permet de cree du sable selon deux regles, l'ajout de sable ne peut se faire que sur de l'herbe et doit etre distant
+	 * de cases d'un arbre
+	 */ 
 	public void creationSable(){
 		for(int x=2;x<=this.taille-3;x++) {
 		for(int y=2;y<=this.taille-3;y++) {
@@ -145,8 +157,9 @@ public abstract class Grille {
 		}
 	}
 	
-	/*
-	 *c'est la creation de riviere aleatoire
+	//ouai ca tu laisse je le degagerai plus tard
+	
+	/*c'est la creation de riviere aleatoire
 	public void creationGrille() {
 
 
@@ -184,38 +197,38 @@ public abstract class Grille {
 	 */
 	
 	/**
-	 * méthodes abstraite redéfinie dans les classes filles
+	 * methodes abstraite redefinie dans les classes filles
 	 */
 	public abstract void creationNeige();
 	public abstract void creationEau();
 	public abstract void creationMontagne();
 	
 	
-	
+	/**
+	 * Une methode (ou getter ??) qui recupere le contenu de la grille a une position (x,y)
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public int getCase(int x, int y) {
 		return this.grille[x][y];
 	}
 	
-	
 	/**
-	 * Méthode permettant de créer la grille à partir des méthodes précédentes
+	 * Une Methode permettant de creer la grille a partir des methodes precedentes, un ordre particulier de ces methode sera choisi (......)
 	 */
 	public  abstract void creationGrille();
 
 	/**
-	 * méthode afficher la grille
+	 * Une methode qui afficher la grille dans la console, ce n'est pas l'interface graphique.
 	 */
 	public void afficher() {
 		for(int i=0;i<this.taille;i++) {
 			for ( int j=0;j<this.taille;j++) {
-				System.out.print(grille[i][j]+" ");
+				System.out.print(grille[i][j]+"");
 			}
 			System.out.println(" ");
 		}
 	}
-
-
-
-
 
 }

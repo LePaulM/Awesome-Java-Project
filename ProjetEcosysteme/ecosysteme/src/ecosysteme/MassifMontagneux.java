@@ -1,14 +1,21 @@
 package ecosysteme;
 
 public class MassifMontagneux extends Grille{
-
+	
+	/**
+	 * Le constructeur de la classe, reutilisant le constructeur de la classe mere
+	 * @param taille
+	 */
 	public MassifMontagneux(int taille) {
-		super(taille);
+		super(taille);// appel au constructeur de sa classe mere : ''Grille''
 	}
 	
-	
+	/**
+	 * Une methode qui cree la zone montagneuse de notre grille, l'explication de cette methode sera detaillee sur le rapport
+	 */
 	@Override
 	public void creationMontagne() {
+		// premier bloc
 		double premiere=2*getTaille()/3; //premiere sequence, grand axe
 		for(int x=0;x<=premiere;x++) {
 			double a=(x*x);
@@ -17,7 +24,7 @@ public class MassifMontagneux extends Grille{
 				getGrille()[x][y]=7;
 			}
 			}
-		
+		// deuxieme bloc
 		for(int x=0;x<=3*getTaille()/4;x++) {
 			double a=(x*x);
 			double b=(Math.pow(3*getTaille()/4,2));
@@ -25,7 +32,7 @@ public class MassifMontagneux extends Grille{
 				getGrille()[x][y]=7;
 			}
 			}
-		
+		// troisieme bloc
 		for(int x=0;x<=3*getTaille()/4;x++) {
 			double a=(x*x);
 			double b=(Math.pow(3*getTaille()/4,2));
@@ -33,7 +40,7 @@ public class MassifMontagneux extends Grille{
 				getGrille()[x][y]=7;
 			}
 			}
-		
+		// quatrieme bloc
 		for(int x=0;x<=4*getTaille()/5;x++) {
 			double a=(x*x);
 			double b=(Math.pow(4*getTaille()/5,2));
@@ -43,8 +50,12 @@ public class MassifMontagneux extends Grille{
 			}
 	}
 	
+	/**
+	 * Une methode qui creer les rivieres qui partent de la montagne. Elles seront larges de trois cases sauf quand celles-ci sont sur une zone de montagne ou une zone de neige elles seront larges d'une case
+	 */
 	@Override
 	public void creationEau() {
+		//premiere riviere
 		int y=(int)this.getTaille()/4;
 		for(int x=(int)this.getTaille()/9;x<this.getTaille();x++) {
 			if(getGrille()[x][y-1]==7||getGrille()[x][y-1]==5) {
@@ -56,6 +67,7 @@ public class MassifMontagneux extends Grille{
 				getGrille()[x][y+1]=2;
 			}
 		}
+		//seconde riviere
 		int v=(int)3*this.getTaille()/4;
 		for(int x=(int)this.getTaille()/9;x<this.getTaille();x++) {
 			if(getGrille()[x][v-1]==7||getGrille()[x][v-1]==5) {
@@ -69,15 +81,18 @@ public class MassifMontagneux extends Grille{
 		}
 	}
 	
-	
+	/**
+	 * Une methode qui cree le glacier au sommet de la montagne et un peu de neige dans les versants.
+	 */
 	public void creationNeige() {
-		int neige=(int)(getTaille()*100/30);
+		//creation du glacier
 		for(int x=0;x<=(int)(this.getTaille()/4)*0.6;x++) {
 			for(int y=0;y<(int)(this.getTaille());y++){
 				getGrille()[x][y]=5;
 			}
 		}
-		
+		//creation de neige de facon aleatoire dans la montagne.
+		int neige=(int)(getTaille()*100/30);
 		int i=0;
 		while(i<neige) {
 			double a=Math.random()*this.getTaille();
@@ -94,17 +109,23 @@ public class MassifMontagneux extends Grille{
 		}
 	}
 	
-	
-	int foret = (int)Math.pow(getTaille(),2)*50/(21*100);
+	/**
+	 * Quantitee de buissons et d'arbres dans l'ecosysteme MassifMontagneux ---> a mettre absolument dans une methode ??
+	 */
+	int arbre = (int)(Math.pow(getTaille(),2)*5/(21*100));
 	int buisson=(int)70*getTaille()/100;
 	
+	/**
+	 * Methode qui cree la grille avec ses composantes, l'ajout successif des sols suit un ordre bien precis
+	 */
 	@Override
 	public void creationGrille() {
+		
 		MassifMontagneux massif = new MassifMontagneux(getTaille());
 		
 		massif.creationMontagne();	
 		massif.creationNeige();
-		massif.creationForet(foret);
+		massif.creationArbre(arbre);
 		massif.creationBuisson(buisson);
 		massif.creationEau();
 		massif.afficher();

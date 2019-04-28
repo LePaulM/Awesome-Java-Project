@@ -6,56 +6,49 @@ import java.util.Iterator;
 
 
 public class Jeu {
-
+	
 	/**
 	 * Constructeur permettant de lancer le jeu
 	 * @throws InterruptedException gere les exceptions d'interruption
 	 */
 	public Jeu(int nombreTours, int taille,  int nombreAnimaux,	String environnement, String nom// récupérer temps de jeu, taille,nom, environnement et nombre d'animaux avec l'affichage graphique
 			) throws InterruptedException {
-		// 		on construit la grille de base et on initialise les animaux 
+// 		on construit la grille de base et on initialise les animaux 
 		if (environnement.equals("Savane")) {
-			Savane grille = new Savane(taille);
-			for (int i=0; i <nombreAnimaux/3;i++) {
-				String nomGirafe="Girafe" + Integer.toString(i);
-			}
-		}
+		Savane grille = new Savane(taille);
+		for (int i=0; i <nombreAnimaux/3;i++) {
+			String nomGirafe="Girafe"+Integer.toString(i);
+			Girafe 
+		}}
 		else if(environnement.equals("Jungle")) {
-			Jungle grille = new Jungle(taille);	
-			InterfaceGraphique affichage = new InterfaceGraphique(grille, 900, 700);	
-		}
+		Jungle grille = new Jungle(taille);	}
 		else if(environnement.equals("Sybérie")) {
-			Syberie grille=new Syberie(taille);	
-			InterfaceGraphique affichage=new InterfaceGraphique(grille, 900, 700);	
-		}
+		Syberie grille=new Syberie(taille);	}
 		else if(environnement.equals("Montagnes")) {
-			MassifMontagneux grille=new MassifMontagneux(taille);
-			InterfaceGraphique affichage=new InterfaceGraphique(grille, 900, 700);	
-		}
+		MassifMontagneux grille=new MassifMontagneux(taille);}
 		else if(environnement.equals("Steppes")) {
-			Steppe grille=new Steppe(taille);
-			InterfaceGraphique affichage=new InterfaceGraphique(grille, 900, 700);	
-		}
-		//		Si l'utilisateur choisi "personnalisé		
+		Steppe grille=new Steppe(taille);}
+//		Si l'utilisateur choisi "personnalisé		
 		else {
 			// Grille ne doit surement pas rester en abstract (à vérifier!)
 		}
-
+		
 		/*
 		// on initialise les ennemis
 		for(int i = 0; i < nombreEnnemis; i++) {
 			grille.creerEnnemi(20, 40, 30, 40, 3, 5);
 		}
-
+		
 		grille.getFourmiliere().apparitionNourriture(stockInitialNourriture);
 		// on initialise les cases de la nourriture
 		for(int i = 0; i < nombreCasesNourriture; i++) {
 			grille.ajouterNourritureAleatoirement(40);
 		}*/
-
-		/* for(int tour = 1; tour < nombreTours + 1; tour ++) {
+		
+		InterfaceGraphique affichage=new InterfaceGraphique(grille, 900, 700);/*
+		for(int tour = 1; tour < nombreTours + 1; tour ++) {
 			tour(affichage);
-
+			
 			//apparition de 3 nouvelles fourmis, d'un ennemi et de nourriture tous les 10 tours 
 			if(tour%10 == 0){
 				// les animaux et les quantites de nourriture qui apparaissent sont mises par d�faut
@@ -67,16 +60,16 @@ public class Jeu {
 			}
 		}*/
 	}
-
+	
 	/**
 	 * Lancer du jeu avec les parametres par defaut
 	 * @throws InterruptedException gere les exceptions d'interruption
 	 */
 	public Jeu() throws InterruptedException {
-		this(100, 10, 100, "Savane", "Partie Standard");
+		this(100, 10, 10, 100, 5, 5);
 	}
-
-
+	
+	
 	/**
 	 * Fonction permettant de realiser l'execution d'un  tour de jeu a l'ensemble des transporteuses 
 	 * presentes sur la grille et met a jour l'affichage a chaque tour de transporteuse
@@ -102,7 +95,7 @@ public class Jeu {
 			affichage.rafraichir();
 		}
 	}*/
-
+	
 	/**
 	 * Fonction permettant de realiser l'execution d'un tour de jeu a l'ensemble des eclaireuses presentes sur la grille 
 	 * et met a jour l'affichage a chaque tour d'eclaireuse
@@ -155,7 +148,7 @@ public class Jeu {
 			affichage.rafraichir();		
 		}
 	}*/
-
+	
 	/**
 	 * Fonction permettant de realiser l'execution d'un  tour de jeu a l'ensemble des ennemis presents sur la grille
 	 * et met a jour l'affichage a chaque tour d'ennemi
@@ -182,7 +175,7 @@ public class Jeu {
 			affichage.rafraichir();		
 		}
 	}*/
-
+		
 
 	/**
 	 * Fonction qui permet de faire jouer un tour a l'ensemble des animaux et de mettre a jour la fenetre d'affichage
@@ -195,14 +188,14 @@ public class Jeu {
 		tourCombattantes(affichage);
 		tourTransporteuses(affichage);
 		tourEnnemis(affichage);
-
+		
 		System.out.println("quantite de nourriture a la fourmiliere: " + grille.getFourmiliere().getStockNourriture());
 		System.out.println();
-
+		
 		// mise a jour des pheromones 
 		grille.majPheromonesNourriture();
 		grille.majPheromonesDanger();
 	}
-	  */
-
+		*/
+	
 }

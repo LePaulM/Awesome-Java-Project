@@ -3,13 +3,20 @@ package ecosysteme;
 
 public class Syberie extends Grille{
 
+	/**
+	 * Le constructeur de la classe, reutilisant le constructeur de la classe mere
+	 * @param taille
+	 */
 	public Syberie(int taille) {
 		super(taille);
 	}
- 
+
+	/**
+	 * Methode qui cree une repartition aleatoire de neige dans la grille, la neige va remplir 70% de la grille. Seule regle : lors de la generation de case neige, la neige ne peut pas aller sur de la neige deja presente
+	 */
 	@Override
 	public void creationNeige() {
-		int neige=(int)(getTaille()*100/70);
+		int neige=(int)(Math.pow(getTaille(), 2)*70/100);
 		int i=0;
 		while(i<neige) {
 			double a=Math.random()*getTaille();
@@ -27,10 +34,15 @@ public class Syberie extends Grille{
 		}
 	}
 	
+	/**
+	 * Methode qui cree une petite zone de montagne dans le coin en haut a gauche
+	 */
 	@Override
 	public void creationMontagne() {
-		for(int x=0;x<=(int)(getTaille()/2)*0.6;x++) {
-			for(int y=0;y<=(int)(1.7*Math.sqrt(Math.pow(getTaille()/2,2)-Math.pow(x/0.6,2)));y++){
+		double a = getTaille()*0.2;//axe des x
+		double b = getTaille()*0.8;//axe des y
+		for(int x=0;x<=(int)(a);x++) {
+			for(int y=0;y<=(int)(b*Math.sqrt(1-((x*x)/(a*a))));y++){
 				getGrille()[x][y]=7;
 			}
 		}
@@ -38,7 +50,7 @@ public class Syberie extends Grille{
 	
 	
 	/**
-	 * ok ca c'est bon
+	 * methode qui creer un cours d'eau avec plusieurs ramifications, crees independemments sous forme de troncons
 	 */
 	@Override
 	public void creationEau() {
@@ -89,15 +101,20 @@ public class Syberie extends Grille{
 	}
 }
 	
-	int foret = (int)Math.pow(getTaille(),2)*50/(21*100);
-	int buisson = (int)getTaille()*0/100;
+	/**
+	 * Quantitee de arbres l'ecosysteme Siberie ---> a mettre absolument dans une methode ??
+	 */
+	int arbre = (int)Math.pow(getTaille(),2)*70/(21*100);
 	
+	/**
+	 * Methode qui cree la grille avec ses composantes, l'ajout successif des sols suit un ordre bien precis
+	 */
 	@Override
 	public void creationGrille() {
 		Syberie syberie = new Syberie(getTaille());
 		
 		syberie.creationMontagne();	
-		syberie.creationForet(foret);
+		syberie.creationArbre(arbre);
 		syberie.creationNeige();
 		syberie.creationEau();
 		syberie.afficher();
